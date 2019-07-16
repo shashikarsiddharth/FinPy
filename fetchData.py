@@ -3,7 +3,7 @@ import packages
 
 class fetch_data:
     def __init__(self, tickerName):
-        ''' Function for initialzing class variables. '''
+        ''' Function for initializing class variables. '''
         self.st_year = 0
         self.st_month = 0
         self.st_date = 0
@@ -36,11 +36,15 @@ class fetch_data:
     def get_end_date(self):
         ''' Function for getting end date. '''
         return packages.dt.datetime(self.end_year, self.end_month, self.end_date)
-
+    
+    def save_csv(self):
+        ''' Function saves stock data in CSV. '''
+        file_name = self.tick + '.csv'
+        self.return_df().to_csv(file_name) 
 
 if __name__ == "__main__":        
     tickerName = input("Enter company's ticker name for gathering data.\n")
-    comp1 = fetch_data(tickerName)
-    comp1.set_start_date()
-    comp1.set_end_date()
-    print(comp1.return_df())
+    org = fetch_data(tickerName)
+    org.set_start_date()
+    org.set_end_date()
+    org.save_csv()
